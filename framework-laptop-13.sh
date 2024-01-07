@@ -6,14 +6,14 @@ echo "Updating system with Pacman..."
 sudo pacman -Syu
 echo "System updated successfully!"
 
-echo -n "Do you want to install standard Arch utils? [neofetch, btop, distrobox, yay, firefox, flatpak, pavucontrol, nano, base-devel, git] (y/n): "
+echo -n "Do you want to install standard Arch utils? [neofetch, btop, distrobox, yay, firefox, flatpak, pavucontrol, nano, base-devel, git, dolphin, linux-firmware, wget, curl, usbutils, udisks2] (y/n): "
 read answer
 
 if [ "$answer" = "y" ]; then
   echo "Installing utils..."
 
   # Install standard Arch utilities
-  sudo pacman -S --needed neofetch btop distrobox firefox flatpak nano pavucontrol base-devel git
+  sudo pacman -S --needed neofetch btop distrobox firefox flatpak nano pavucontrol base-devel git dolphin linux-firmware curl wget usbutils udisks2
 
   # Check if the installation was successful
   echo "Checking installation status..."
@@ -31,6 +31,19 @@ if [ "$answer" = "y" ]; then
       makepkg -si
       cd ..
       echo "'yay' installed successfully!"
+
+      echo "Do you want to install framework_tool? (y/n): "
+      read answer
+
+      if [ "$answer" = "y" ]; then
+        echo "Installing framework_tool..."
+        yay -S framework-system-git
+        echo "framework_tool installation complete."
+      elif [ "$answer" = "n" ]; then
+        echo "Skipping framework_tool installation."
+      else
+        echo "Invalid choice. Please enter 'y' or 'n'."
+      fi
     else
       echo "Failed to clone 'yay' repository. Installation aborted."
     fi
@@ -76,3 +89,6 @@ elif [ "$answer" = "n" ]; then
 else
   echo "Invalid choice. Please enter 'y' or 'n'."
 fi
+
+echo "Framework 13 laptop (Intel) color profile is going to be downloaded to /home/$USER/"
+wget https://www.notebookcheck.net/uploads/tx_nbc2/BOE_CQ_______NE135FBM_N41_01.icm
