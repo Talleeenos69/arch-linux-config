@@ -1,0 +1,367 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, ubuntu;
+    font-size: 14px;
+    
+    /* 
+    
+    primary-color: #69CDD9;
+    secondary-color: #e98d00;
+    dark-primary: #060606;
+    font-size: 14px;
+    ui-roundness: 20px;
+    dark-text-colour: #1b1b1b;
+    
+    */
+}
+
+window#waybar {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    transition-property: background-color;
+    transition-duration: .5s;
+    border-bottom-color: @accent_bg_color;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px @accent_bg_color;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: @accent_fg_color;
+}
+
+#workspaces button:hover {
+    background: @view_bg_color;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px @accent_bg_color;
+}
+
+#workspaces button.urgent {
+    background-color: @error_bg_color;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#image,
+#mpris,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#custom-cava,
+#gamemode,
+#window
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#clock:hover {
+    background-color: #282828;
+    color: @theme_fg_color;
+}
+
+#cpu {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#memory {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+battery {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 7px;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: @destructive_bg_color;
+    color: @destructive_color;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    margin-bottom: 5px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#power-profiles-daemon {
+    padding-right: 15px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#power-profiles-daemon.performance {
+    background-color: @destructive_bg_color;
+    color: @destructive_color;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: @accent_bg_color;
+    color: @theme_bg_color;
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: @success_bg_color;
+    color: @success_color;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#disk {
+    background-color: #964B00;
+}
+
+#backlight {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#network {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#network.disconnected {
+    background-color: @error_bg_color;
+}
+
+#pulseaudio {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: @view_bg_color;
+    color: #ffffff;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#window {
+    color: @theme_fg_color;
+    margin-left: -20px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#temperature {
+    background-color: @accent_bg_color;
+    color: @theme_bg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#temperature.critical {
+    background-color: @destructive_bg_color;
+    color: @destructive_color;
+}
+
+#tray {
+    background-color: @view_bg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.5s;
+}
+
+#idle_inhibitor.activated {
+    background-color: @accent_bg_color;
+    color: @theme_bg_color;
+}
+
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: white;
+}
+
+#privacy-item.screenshare {
+    background-color: #cf5700;
+}
+
+#privacy-item.audio-in {
+    background-color: #1ca000;
+}
+
+#privacy-item.audio-out {
+    background-color: #0069d4;
+}
+
+#custom-cava {
+    font-size: 6px;
+}
+
+#image {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+#mpris {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+#gamemode {
+    background-color: @view_bg_color;
+    color: @theme_fg_color;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
